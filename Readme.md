@@ -1,5 +1,7 @@
 # ZenkakuView
 
+Inspired [全角チェッカー](https://ao-system.net/doublecharcheck/).
+
 - [ ] Support D&D Mode
 - [ ] Support Copy&Paste TextArea
 - [ ] Universal Color Design
@@ -7,6 +9,16 @@
 - [ ] Require options?
 - [ ] Show line number
 - [ ] Support ACE editor
+
+## Install Elm
+
+Install [elm](http://elm-lang.org/install).
+
+### Ubuntu
+
+```shell
+$ sudo npm i -g elm --unsafe-perm=true --allow-root
+```
 
 ## Learning Elm
 
@@ -26,6 +38,10 @@ rapid development.
 ```sh
 $ elm reactor
 ```
+
+Let's access to [http://localhost:8000/Zenkaku.elm](http://localhost:8000/Zenkaku.elm).
+
+### Option
 
 package install.
 
