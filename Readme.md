@@ -1,5 +1,7 @@
 # ZenkakuView
 
+[DEMO](https://waddlaw.github.io/ZenkakuView/).
+
 Inspired [全角チェッカー](https://ao-system.net/doublecharcheck/).
 
 - [x] Support D&D Mode
