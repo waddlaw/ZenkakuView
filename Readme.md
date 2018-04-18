@@ -48,7 +48,7 @@ rapid development.
 $ elm-live Zenkaku.elm --output=zenkaku.js --open
 ```
 
-Let's access to [http://localhost:8000/Zenkaku.elm](http://localhost:8000/Zenkaku.elm).
+Let's access to [http://localhost:8000/](http://localhost:8000/).
 
 ### Option
 
