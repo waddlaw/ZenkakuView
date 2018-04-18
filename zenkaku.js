@@ -9242,6 +9242,27 @@ var _user$project$Main$update = F2(
 			_1: _elm_lang$core$Platform_Cmd$none
 		};
 	});
+var _user$project$Main$toHightlight = function (c) {
+	return _user$project$Main$isAscii(c) ? _elm_lang$html$Html$text(
+		_elm_lang$core$String$fromChar(c)) : A2(
+		_elm_lang$html$Html$span,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'hsl(48, 100%, 67%)'},
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(
+				_elm_lang$core$String$fromChar(c)),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
 	_0: {textLen: 0, inDropZone: false, content: ''},
@@ -9446,20 +9467,45 @@ var _user$project$Main$view = function (model) {
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('column is-12'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'background-color', _1: '#efefef'},
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
-						_0: (_elm_lang$core$Native_Utils.cmp(
-							_elm_lang$core$String$length(model.content),
-							0) > 0) ? A2(
-							_elm_lang$html$Html$div,
+						_0: A2(
+							_elm_lang$html$Html$p,
 							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(model.content),
-								_1: {ctor: '[]'}
-							}) : _elm_lang$html$Html$text(''),
+							(_elm_lang$core$Native_Utils.cmp(
+								_elm_lang$core$String$length(model.content),
+								0) > 0) ? _elm_lang$core$List$concat(
+								A2(
+									_elm_lang$core$List$intersperse,
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$br,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									},
+									A2(
+										_elm_lang$core$List$map,
+										function (_p9) {
+											return A2(
+												_elm_lang$core$List$map,
+												_user$project$Main$toHightlight,
+												_elm_lang$core$String$toList(_p9));
+										},
+										_elm_lang$core$String$lines(model.content)))) : _elm_lang$core$List$singleton(
+								_elm_lang$html$Html$text(''))),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}

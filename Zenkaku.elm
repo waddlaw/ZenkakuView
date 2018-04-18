@@ -66,14 +66,29 @@ view model =
                         ]
                   ]
             ]
-      , div [ class "column is-12" ]
-            [ if String.length model.content > 0 then
-                div []
-                    [text model.content]
-              else
-                text ""
+      , div [ class "column is-12"
+            , style [ ("background-color", "#efefef" ) ]
+            ]
+            [ p [ ]
+                ( if String.length model.content > 0 then
+                    model.content
+                      |> String.lines
+                      |> List.map (List.map toHightlight << String.toList)
+                      |> List.intersperse [Html.br [] []]
+                      |> List.concat
+                  else
+                    List.singleton (text "")
+                )
             ]
       ]
+
+toHightlight : Char -> Html msg
+toHightlight c =
+  if isAscii c then
+    text (String.fromChar c)
+  else
+    Html.span [ style [ ("background-color", "hsl(48, 100%, 67%)") ] ]
+              [ text (String.fromChar c) ]
 
 -- dropable : List (Html.Attribute msg)
 dropable = FileReader.dropZone
