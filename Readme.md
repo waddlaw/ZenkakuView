@@ -12,12 +12,13 @@ Inspired [全角チェッカー](https://ao-system.net/doublecharcheck/).
 
 ## Install Elm
 
-Install [elm](http://elm-lang.org/install).
+- [Elm Platform](http://elm-lang.org/install).
+- [architectcodes/elm-live](https://github.com/architectcodes/elm-live)
 
 ### Ubuntu
 
 ```shell
-$ sudo npm i -g elm --unsafe-perm=true --allow-root
+$ sudo npm i -g elm elm-live --unsafe-perm=true --allow-root
 ```
 
 ## Learning Elm
@@ -36,7 +37,7 @@ $ sudo npm i -g elm --unsafe-perm=true --allow-root
 rapid development.
 
 ```sh
-$ elm reactor
+$ elm-live Zenkaku.elm --output=zenkaku.js --open
 ```
 
 Let's access to [http://localhost:8000/Zenkaku.elm](http://localhost:8000/Zenkaku.elm).
@@ -46,5 +47,5 @@ Let's access to [http://localhost:8000/Zenkaku.elm](http://localhost:8000/Zenkak
 package install.
 
 ```sh
-$ elm package install xxxx/yyyyy
+$ elm package install --yes xxxx/yyyyy
 ```
