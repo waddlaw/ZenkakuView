@@ -8,15 +8,16 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   </head>
   <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-    </div>
-  </section>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">全角チェッカー。全角文字が含まれているか確認</h1>
+        <p class="subtitle">使い方はとってもシンプル。コードをペーストするだけ。リアルタイムに表示されますので素早く調べられます。</p>
+
+        <section id="zenkaku"></section>
+      </div>
+    </section>
+
+    <script src="zenkaku.js"></script>
+    <script>Elm.Main.embed(document.querySelector("#zenkaku"));</script>
   </body>
 </html>
