@@ -2,8 +2,8 @@
 
 Inspired [全角チェッカー](https://ao-system.net/doublecharcheck/).
 
-- [ ] Support D&D Mode
-- [ ] Support Copy&Paste TextArea
+- [x] Support D&D Mode
+- [x] Support Copy&Paste TextArea
 - [ ] Universal Color Design
 - [ ] Completely to use Offiline
 - [ ] Require options?
@@ -26,6 +26,12 @@ $ sudo npm i -g elm elm-live --unsafe-perm=true --allow-root
 - [Elm tutorial](https://www.elm-tutorial.org/jp/)
 
 ## dependencies
+
+framework
+
+- [BULMA](https://bulma.io/)
+
+elm package
 
 - [norpan/elm-file-reader](http://package.elm-lang.org/packages/norpan/elm-file-reader/2.0.1/)
 - [danyx23/elm-mimetype](http://package.elm-lang.org/packages/danyx23/elm-mimetype/4.0.0/)
