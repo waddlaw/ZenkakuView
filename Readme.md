@@ -1,8 +1,8 @@
 # 全角ビュー
 
-[デモ](https://waddlaw.github.io/ZenkakuView/).
-
 [全角チェッカー](https://ao-system.net/doublecharcheck/) を参考に `Elm` で実装しました。
+
+実際に [デモ](https://waddlaw.github.io/ZenkakuView/) から試すことができます。
 
 ## Elm のインストール
 
@@ -32,6 +32,8 @@ elm パッケージ
 - [danyx23/elm-mimetype](http://package.elm-lang.org/packages/danyx23/elm-mimetype/4.0.0/)
 - [elm-lang/html](http://package.elm-lang.org/packages/elm-lang/html/2.0.0/)
 - [elm-lang/core](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/)
+- [elm-community/maybe-extra](http://package.elm-lang.org/packages/elm-community/maybe-extra/4.0.0/)
+- [elm-community/result-extra](http://package.elm-lang.org/packages/elm-community/result-extra/2.2.0/)
 
 ## 開発方法
 

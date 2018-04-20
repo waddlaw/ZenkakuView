@@ -4437,6 +4437,305 @@ var _elm_lang$core$Array$repeat = F2(
 	});
 var _elm_lang$core$Array$Array = {ctor: 'Array'};
 
+var _elm_community$maybe_extra$Maybe_Extra$foldrValues = F2(
+	function (item, list) {
+		var _p0 = item;
+		if (_p0.ctor === 'Nothing') {
+			return list;
+		} else {
+			return {ctor: '::', _0: _p0._0, _1: list};
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$values = A2(
+	_elm_lang$core$List$foldr,
+	_elm_community$maybe_extra$Maybe_Extra$foldrValues,
+	{ctor: '[]'});
+var _elm_community$maybe_extra$Maybe_Extra$filter = F2(
+	function (f, m) {
+		var _p1 = A2(_elm_lang$core$Maybe$map, f, m);
+		if ((_p1.ctor === 'Just') && (_p1._0 === true)) {
+			return m;
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$traverseArray = function (f) {
+	var step = F2(
+		function (e, acc) {
+			var _p2 = f(e);
+			if (_p2.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return A2(
+					_elm_lang$core$Maybe$map,
+					_elm_lang$core$Array$push(_p2._0),
+					acc);
+			}
+		});
+	return A2(
+		_elm_lang$core$Array$foldl,
+		step,
+		_elm_lang$core$Maybe$Just(_elm_lang$core$Array$empty));
+};
+var _elm_community$maybe_extra$Maybe_Extra$combineArray = _elm_community$maybe_extra$Maybe_Extra$traverseArray(_elm_lang$core$Basics$identity);
+var _elm_community$maybe_extra$Maybe_Extra$traverse = function (f) {
+	var step = F2(
+		function (e, acc) {
+			var _p3 = f(e);
+			if (_p3.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return A2(
+					_elm_lang$core$Maybe$map,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(_p3._0),
+					acc);
+			}
+		});
+	return A2(
+		_elm_lang$core$List$foldr,
+		step,
+		_elm_lang$core$Maybe$Just(
+			{ctor: '[]'}));
+};
+var _elm_community$maybe_extra$Maybe_Extra$combine = _elm_community$maybe_extra$Maybe_Extra$traverse(_elm_lang$core$Basics$identity);
+var _elm_community$maybe_extra$Maybe_Extra$toArray = function (m) {
+	var _p4 = m;
+	if (_p4.ctor === 'Nothing') {
+		return _elm_lang$core$Array$empty;
+	} else {
+		return A2(_elm_lang$core$Array$repeat, 1, _p4._0);
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$toList = function (m) {
+	var _p5 = m;
+	if (_p5.ctor === 'Nothing') {
+		return {ctor: '[]'};
+	} else {
+		return {
+			ctor: '::',
+			_0: _p5._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$orElse = F2(
+	function (ma, mb) {
+		var _p6 = mb;
+		if (_p6.ctor === 'Nothing') {
+			return ma;
+		} else {
+			return mb;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$orElseLazy = F2(
+	function (fma, mb) {
+		var _p7 = mb;
+		if (_p7.ctor === 'Nothing') {
+			return fma(
+				{ctor: '_Tuple0'});
+		} else {
+			return mb;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$orLazy = F2(
+	function (ma, fmb) {
+		var _p8 = ma;
+		if (_p8.ctor === 'Nothing') {
+			return fmb(
+				{ctor: '_Tuple0'});
+		} else {
+			return ma;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$or = F2(
+	function (ma, mb) {
+		var _p9 = ma;
+		if (_p9.ctor === 'Nothing') {
+			return mb;
+		} else {
+			return ma;
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$prev = _elm_lang$core$Maybe$map2(_elm_lang$core$Basics$always);
+var _elm_community$maybe_extra$Maybe_Extra$next = _elm_lang$core$Maybe$map2(
+	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
+var _elm_community$maybe_extra$Maybe_Extra$andMap = _elm_lang$core$Maybe$map2(
+	F2(
+		function (x, y) {
+			return y(x);
+		}));
+var _elm_community$maybe_extra$Maybe_Extra$unpack = F3(
+	function (d, f, m) {
+		var _p10 = m;
+		if (_p10.ctor === 'Nothing') {
+			return d(
+				{ctor: '_Tuple0'});
+		} else {
+			return f(_p10._0);
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$unwrap = F3(
+	function (d, f, m) {
+		var _p11 = m;
+		if (_p11.ctor === 'Nothing') {
+			return d;
+		} else {
+			return f(_p11._0);
+		}
+	});
+var _elm_community$maybe_extra$Maybe_Extra$isJust = function (m) {
+	var _p12 = m;
+	if (_p12.ctor === 'Nothing') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$isNothing = function (m) {
+	var _p13 = m;
+	if (_p13.ctor === 'Nothing') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra$join = function (mx) {
+	var _p14 = mx;
+	if (_p14.ctor === 'Just') {
+		return _p14._0;
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_community$maybe_extra$Maybe_Extra_ops = _elm_community$maybe_extra$Maybe_Extra_ops || {};
+_elm_community$maybe_extra$Maybe_Extra_ops['?'] = F2(
+	function (mx, x) {
+		return A2(_elm_lang$core$Maybe$withDefault, x, mx);
+	});
+
+var _elm_community$result_extra$Result_Extra$merge = function (r) {
+	var _p0 = r;
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return _p0._0;
+	}
+};
+var _elm_community$result_extra$Result_Extra$orElse = F2(
+	function (ra, rb) {
+		var _p1 = rb;
+		if (_p1.ctor === 'Err') {
+			return ra;
+		} else {
+			return rb;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$orElseLazy = F2(
+	function (fra, rb) {
+		var _p2 = rb;
+		if (_p2.ctor === 'Err') {
+			return fra(
+				{ctor: '_Tuple0'});
+		} else {
+			return rb;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$orLazy = F2(
+	function (ra, frb) {
+		var _p3 = ra;
+		if (_p3.ctor === 'Err') {
+			return frb(
+				{ctor: '_Tuple0'});
+		} else {
+			return ra;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$or = F2(
+	function (ra, rb) {
+		var _p4 = ra;
+		if (_p4.ctor === 'Err') {
+			return rb;
+		} else {
+			return ra;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$andMap = F2(
+	function (ra, rb) {
+		var _p5 = {ctor: '_Tuple2', _0: ra, _1: rb};
+		if (_p5._1.ctor === 'Err') {
+			return _elm_lang$core$Result$Err(_p5._1._0);
+		} else {
+			return A2(_elm_lang$core$Result$map, _p5._1._0, _p5._0);
+		}
+	});
+var _elm_community$result_extra$Result_Extra$singleton = _elm_lang$core$Result$Ok;
+var _elm_community$result_extra$Result_Extra$combine = A2(
+	_elm_lang$core$List$foldr,
+	_elm_lang$core$Result$map2(
+		F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})),
+	_elm_lang$core$Result$Ok(
+		{ctor: '[]'}));
+var _elm_community$result_extra$Result_Extra$mapBoth = F3(
+	function (errFunc, okFunc, result) {
+		var _p6 = result;
+		if (_p6.ctor === 'Ok') {
+			return _elm_lang$core$Result$Ok(
+				okFunc(_p6._0));
+		} else {
+			return _elm_lang$core$Result$Err(
+				errFunc(_p6._0));
+		}
+	});
+var _elm_community$result_extra$Result_Extra$unpack = F3(
+	function (errFunc, okFunc, result) {
+		var _p7 = result;
+		if (_p7.ctor === 'Ok') {
+			return okFunc(_p7._0);
+		} else {
+			return errFunc(_p7._0);
+		}
+	});
+var _elm_community$result_extra$Result_Extra$unwrap = F3(
+	function (defaultValue, okFunc, result) {
+		var _p8 = result;
+		if (_p8.ctor === 'Ok') {
+			return okFunc(_p8._0);
+		} else {
+			return defaultValue;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$extract = F2(
+	function (f, x) {
+		var _p9 = x;
+		if (_p9.ctor === 'Ok') {
+			return _p9._0;
+		} else {
+			return f(_p9._0);
+		}
+	});
+var _elm_community$result_extra$Result_Extra$isErr = function (x) {
+	var _p10 = x;
+	if (_p10.ctor === 'Ok') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _elm_community$result_extra$Result_Extra$isOk = function (x) {
+	var _p11 = x;
+	if (_p11.ctor === 'Ok') {
+		return true;
+	} else {
+		return false;
+	}
+};
+
 var _elm_lang$core$Task$onError = _elm_lang$core$Native_Scheduler.onError;
 var _elm_lang$core$Task$andThen = _elm_lang$core$Native_Scheduler.andThen;
 var _elm_lang$core$Task$spawnCmd = F2(
@@ -9136,13 +9435,6 @@ var _norpan$elm_file_reader$FileReader$dropZone = function (_p2) {
 		_norpan$elm_file_reader$FileReader$dataFormatAttributes(_p3.dataFormat));
 };
 
-var _user$project$Main$isAscii = function (c) {
-	return (_elm_lang$core$Native_Utils.cmp(
-		0,
-		_elm_lang$core$Char$toCode(c)) < 1) && (_elm_lang$core$Native_Utils.cmp(
-		_elm_lang$core$Char$toCode(c),
-		127) < 1);
-};
 var _user$project$Main$getFileContent = function (file) {
 	var _p0 = file.data;
 	if (_p0.ctor === 'Ok') {
@@ -9152,40 +9444,49 @@ var _user$project$Main$getFileContent = function (file) {
 			_1: _danyx23$elm_mimetype$MimeType$parseMimeType(file.mimeType)
 		};
 		if ((((_p1.ctor === '_Tuple2') && (_p1._0.ctor === 'DataURL')) && (_p1._1.ctor === 'Just')) && (_p1._1._0.ctor === 'Image')) {
-			return '画像ファイルは対応していません';
+			return _elm_lang$core$Result$Err('画像ファイルは対応していません');
 		} else {
-			return _p0._0;
+			return _elm_lang$core$Result$Ok(_p0._0);
 		}
 	} else {
 		var _p2 = _p0._0;
-		return A2(
-			_elm_lang$core$Basics_ops['++'],
-			'入力されたファイルが不正です。',
+		return _elm_lang$core$Result$Err(
 			A2(
 				_elm_lang$core$Basics_ops['++'],
-				_elm_lang$core$Basics$toString(_p2.code),
+				'入力されたファイルが不正です。',
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					' ',
+					_elm_lang$core$Basics$toString(_p2.code),
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						_p2.name,
-						A2(_elm_lang$core$Basics_ops['++'], ' ', _p2.message)))));
+						' ',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_p2.name,
+							A2(_elm_lang$core$Basics_ops['++'], ' ', _p2.message))))));
 	}
 };
-var _user$project$Main$calcZenkaku = function (file) {
-	var _p3 = file.data;
-	if (_p3.ctor === 'Ok') {
-		return _elm_lang$core$String$length(
-			A2(
-				_elm_lang$core$String$filter,
-				function (_p4) {
-					return !_user$project$Main$isAscii(_p4);
-				},
-				_p3._0));
-	} else {
-		return 0;
-	}
+var _user$project$Main$isAscii = function (c) {
+	return (_elm_lang$core$Native_Utils.cmp(
+		0,
+		_elm_lang$core$Char$toCode(c)) < 1) && (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$Char$toCode(c),
+		127) < 1);
+};
+var _user$project$Main$lengthNonAscii = function (_p3) {
+	return _elm_lang$core$String$length(
+		A2(
+			_elm_lang$core$String$filter,
+			function (_p4) {
+				return !_user$project$Main$isAscii(_p4);
+			},
+			_p3));
+};
+var _user$project$Main$calcNonAscii = function (_p5) {
+	return A2(
+		_elm_lang$core$Result$map,
+		_user$project$Main$lengthNonAscii,
+		_user$project$Main$getFileContent(_p5));
 };
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
@@ -9195,20 +9496,14 @@ var _user$project$Main$update = F2(
 		return {
 			ctor: '_Tuple2',
 			_0: function () {
-				var _p5 = msg;
-				switch (_p5.ctor) {
+				var _p6 = msg;
+				switch (_p6.ctor) {
 					case 'InputText':
-						var _p7 = _p5._0;
+						var _p7 = _p6._0;
 						return _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								textLen: _elm_lang$core$String$length(
-									A2(
-										_elm_lang$core$String$filter,
-										function (_p6) {
-											return !_user$project$Main$isAscii(_p6);
-										},
-										_p7)),
+								textLen: _user$project$Main$lengthNonAscii(_p7),
 								content: _p7
 							});
 					case 'DropZoneEntered':
@@ -9220,22 +9515,30 @@ var _user$project$Main$update = F2(
 							model,
 							{inDropZone: false});
 					default:
-						var _p8 = _p5._0;
+						var _p10 = _p6._0;
 						return _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								textLen: A2(
-									_elm_lang$core$Maybe$withDefault,
+								textLen: A3(
+									_elm_community$maybe_extra$Maybe_Extra$unwrap,
 									0,
-									_elm_lang$core$List$head(
-										A2(_elm_lang$core$List$map, _user$project$Main$calcZenkaku, _p8))),
-								content: A2(
-									_elm_lang$core$Maybe$withDefault,
+									function (_p8) {
+										return A2(
+											_elm_lang$core$Result$withDefault,
+											0,
+											_user$project$Main$calcNonAscii(_p8));
+									},
+									_elm_lang$core$List$head(_p10)),
+								content: A3(
+									_elm_community$maybe_extra$Maybe_Extra$unwrap,
 									'',
-									A2(
-										_elm_lang$core$Maybe$map,
-										_user$project$Main$getFileContent,
-										_elm_lang$core$List$head(_p8)))
+									function (_p9) {
+										return A2(
+											_elm_community$result_extra$Result_Extra$extract,
+											_elm_lang$core$Basics$identity,
+											_user$project$Main$getFileContent(_p9));
+									},
+									_elm_lang$core$List$head(_p10))
 							});
 				}
 			}(),
@@ -9345,113 +9648,119 @@ var _user$project$Main$view = function (model) {
 							{
 								ctor: '::',
 								_0: A2(
-									_elm_lang$html$Html$p,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('is-size-1'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											_elm_lang$core$Basics$toString(model.textLen)),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$style(
-													{
+									_elm_lang$html$Html$div,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+													_1: {
 														ctor: '::',
-														_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+														_0: {ctor: '_Tuple2', _0: 'height', _1: '430px'},
 														_1: {
 															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'height', _1: '430px'},
+															_0: {ctor: '_Tuple2', _0: 'border', _1: '2px dashed #00d1b2'},
 															_1: {
 																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'border', _1: '2px dashed #00d1b2'},
+																_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '10px'},
 																_1: {
 																	ctor: '::',
-																	_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '10px'},
+																	_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
 																	_1: {
 																		ctor: '::',
-																		_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+																		_0: {ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
 																		_1: {
 																			ctor: '::',
-																			_0: {ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
-																			_1: {
-																				ctor: '::',
-																				_0: {ctor: '_Tuple2', _0: 'justify-content', _1: 'center'},
-																				_1: {ctor: '[]'}
-																			}
+																			_0: {ctor: '_Tuple2', _0: 'justify-content', _1: 'center'},
+																			_1: {ctor: '[]'}
 																		}
 																	}
 																}
 															}
 														}
-													}),
-												_1: {ctor: '[]'}
-											},
-											_user$project$Main$dropable),
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$p,
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('has-text-centered'),
-														_1: {ctor: '[]'}
-													},
-													_user$project$Main$dropable),
+													}
+												}),
+											_1: {ctor: '[]'}
+										},
+										_user$project$Main$dropable),
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$p,
+											A2(
+												_elm_lang$core$Basics_ops['++'],
 												{
 													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('has-text-centered'),
+													_1: {ctor: '[]'}
+												},
+												_user$project$Main$dropable),
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$i,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('is-size-1 far fa-file-code'),
+														_1: {ctor: '[]'}
+													},
+													{ctor: '[]'}),
+												_1: {
+													ctor: '::',
 													_0: A2(
-														_elm_lang$html$Html$i,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('is-size-1 far fa-file-code'),
-															_1: {ctor: '[]'}
-														},
+														_elm_lang$html$Html$br,
+														{ctor: '[]'},
 														{ctor: '[]'}),
 													_1: {
 														ctor: '::',
 														_0: A2(
-															_elm_lang$html$Html$br,
-															{ctor: '[]'},
-															{ctor: '[]'}),
-														_1: {
-															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$p,
-																A2(
-																	_elm_lang$core$Basics_ops['++'],
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$style(
-																			{
-																				ctor: '::',
-																				_0: {ctor: '_Tuple2', _0: 'margin', _1: '1em'},
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {ctor: '[]'}
-																	},
-																	_user$project$Main$dropable),
+															_elm_lang$html$Html$p,
+															A2(
+																_elm_lang$core$Basics_ops['++'],
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('ファイルをドロップして分析'),
+																	_0: _elm_lang$html$Html_Attributes$style(
+																		{
+																			ctor: '::',
+																			_0: {ctor: '_Tuple2', _0: 'margin', _1: '1em'},
+																			_1: {ctor: '[]'}
+																		}),
 																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
+																},
+																_user$project$Main$dropable),
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('ファイルをドロップして分析'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
 													}
-												}),
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$p,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('is-size-3'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'全角文字が',
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														_elm_lang$core$Basics$toString(model.textLen),
+														'文字見つかりました。'))),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -9483,9 +9792,7 @@ var _user$project$Main$view = function (model) {
 						_0: A2(
 							_elm_lang$html$Html$p,
 							{ctor: '[]'},
-							(_elm_lang$core$Native_Utils.cmp(
-								_elm_lang$core$String$length(model.content),
-								0) > 0) ? _elm_lang$core$List$concat(
+							(!_elm_lang$core$String$isEmpty(model.content)) ? _elm_lang$core$List$concat(
 								A2(
 									_elm_lang$core$List$intersperse,
 									{
@@ -9498,11 +9805,11 @@ var _user$project$Main$view = function (model) {
 									},
 									A2(
 										_elm_lang$core$List$map,
-										function (_p9) {
+										function (_p11) {
 											return A2(
 												_elm_lang$core$List$map,
 												_user$project$Main$toHightlight,
-												_elm_lang$core$String$toList(_p9));
+												_elm_lang$core$String$toList(_p11));
 										},
 										_elm_lang$core$String$lines(model.content)))) : _elm_lang$core$List$singleton(
 								_elm_lang$html$Html$text(''))),
