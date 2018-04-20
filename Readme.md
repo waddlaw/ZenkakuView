@@ -1,58 +1,49 @@
-# ZenkakuView
+# 全角ビュー
 
-[DEMO](https://waddlaw.github.io/ZenkakuView/).
+[デモ](https://waddlaw.github.io/ZenkakuView/).
 
-Inspired [全角チェッカー](https://ao-system.net/doublecharcheck/).
+[全角チェッカー](https://ao-system.net/doublecharcheck/) を参考に `Elm` で実装しました。
 
-- [x] Support D&D Mode
-- [x] Support Copy&Paste TextArea
-- [ ] Universal Color Design
-- [ ] Completely to use Offiline
-- [ ] Require options?
-- [ ] Show line number
-- [ ] Support ACE editor
-
-## Install Elm
+## Elm のインストール
 
 - [Elm Platform](http://elm-lang.org/install).
 - [architectcodes/elm-live](https://github.com/architectcodes/elm-live)
 
-### Ubuntu
+**Ubuntu** の場合は以下のコマンドでインストールできます。
 
-```shell
+```sh
 $ sudo npm i -g elm elm-live --unsafe-perm=true --allow-root
 ```
 
-## Learning Elm
+## Elm について
 
 - [Elm tutorial](https://www.elm-tutorial.org/jp/)
+- [Elm Syntax](http://elm-lang.org/docs/syntax)
 
-## dependencies
+## このアプリケーションで利用しているもの
 
-framework
+フレームワーク
 
 - [BULMA](https://bulma.io/)
 
-elm package
+elm パッケージ
 
 - [norpan/elm-file-reader](http://package.elm-lang.org/packages/norpan/elm-file-reader/2.0.1/)
 - [danyx23/elm-mimetype](http://package.elm-lang.org/packages/danyx23/elm-mimetype/4.0.0/)
 - [elm-lang/html](http://package.elm-lang.org/packages/elm-lang/html/2.0.0/)
 - [elm-lang/core](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/)
 
-## develop
+## 開発方法
 
-rapid development.
+`elm-live` を使うと良い感じに開発が進みます。
 
 ```sh
 $ elm-live Zenkaku.elm --output=zenkaku.js --open
 ```
 
-Let's access to [http://localhost:8000/](http://localhost:8000/).
+上記コマンドを実行すると、自動的にブラウザが開くのでデバッグできます。
 
-### Option
-
-package install.
+### elm パッケージのインストール方法
 
 ```sh
 $ elm package install --yes xxxx/yyyyy
