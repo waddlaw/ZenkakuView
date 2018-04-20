@@ -6,8 +6,6 @@ import Html.Attributes exposing (class, placeholder, rows, src, style)
 import Html.Events exposing (onInput)
 import FileReader
 import MimeType
-import Maybe.Extra
-import Result.Extra
 import String.Extra
 
 -- モデル
