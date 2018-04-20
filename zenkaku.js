@@ -10524,7 +10524,7 @@ var _user$project$Main$update = F2(
 			_1: _elm_lang$core$Platform_Cmd$none
 		};
 	});
-var _user$project$Main$toHightlight = function (c) {
+var _user$project$Main$toHighlight = function (c) {
 	return _user$project$Main$isAscii(c) ? _elm_lang$html$Html$text(
 		_elm_lang$core$String$fromChar(c)) : A2(
 		_elm_lang$html$Html$span,
@@ -10769,7 +10769,7 @@ var _user$project$Main$view = function (model) {
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$p,
+							_elm_lang$html$Html$pre,
 							{ctor: '[]'},
 							function () {
 								var _p10 = _elm_community$string_extra$String_Extra$nonEmpty(model.content);
@@ -10778,17 +10778,23 @@ var _user$project$Main$view = function (model) {
 										_elm_lang$html$Html$text(''));
 								} else {
 									return A2(
-										_elm_lang$core$List$map,
-										function (_p11) {
-											return A2(
-												_elm_lang$html$Html$p,
-												{ctor: '[]'},
-												A2(
-													_elm_lang$core$List$map,
-													_user$project$Main$toHightlight,
-													_elm_lang$core$String$toList(_p11)));
-										},
-										_elm_lang$core$String$lines(_p10._0));
+										_elm_lang$core$List$intersperse,
+										A2(
+											_elm_lang$html$Html$br,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										A2(
+											_elm_lang$core$List$map,
+											function (_p11) {
+												return A2(
+													_elm_lang$html$Html$code,
+													{ctor: '[]'},
+													A2(
+														_elm_lang$core$List$map,
+														_user$project$Main$toHighlight,
+														_elm_lang$core$String$toList(_p11)));
+											},
+											_elm_lang$core$String$lines(_p10._0)));
 								}
 							}()),
 						_1: {ctor: '[]'}

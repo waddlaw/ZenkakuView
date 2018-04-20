@@ -72,20 +72,21 @@ view model =
       , div [ class "column is-12"
             , style [ ("background-color", "#efefef" ) ]
             ]
-            [ p [ ]
+            [ Html.pre [ ]
                 ( case String.Extra.nonEmpty model.content of
                     Nothing -> List.singleton (text "")
                     Just data -> data
                               |> String.lines
-                              |> List.map (String.toList >> List.map toHightlight >> Html.p [])
+                              |> List.map (String.toList >> List.map toHighlight >> Html.code [])
+                              |> List.intersperse (Html.br [] [])
                 )
             ]
       ]
 
-toHightlight : Char -> Html msg
-toHightlight c =
+toHighlight : Char -> Html msg
+toHighlight c =
   if isAscii c then
-    text <| String.fromChar c
+    text <| (String.fromChar c)
   else
     Html.span [ style [ ("background-color", "hsl(48, 100%, 67%)") ] ]
               [ text (String.fromChar c) ]
