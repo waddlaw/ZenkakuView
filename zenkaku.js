@@ -9482,12 +9482,6 @@ var _user$project$Main$lengthNonAscii = function (_p3) {
 			},
 			_p3));
 };
-var _user$project$Main$calcNonAscii = function (_p5) {
-	return A2(
-		_elm_lang$core$Result$map,
-		_user$project$Main$lengthNonAscii,
-		_user$project$Main$getFileContent(_p5));
-};
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
@@ -9496,15 +9490,15 @@ var _user$project$Main$update = F2(
 		return {
 			ctor: '_Tuple2',
 			_0: function () {
-				var _p6 = msg;
-				switch (_p6.ctor) {
+				var _p5 = msg;
+				switch (_p5.ctor) {
 					case 'InputText':
-						var _p7 = _p6._0;
+						var _p6 = _p5._0;
 						return _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								textLen: _user$project$Main$lengthNonAscii(_p7),
-								content: _p7
+								textLen: _user$project$Main$lengthNonAscii(_p6),
+								content: _p6
 							});
 					case 'DropZoneEntered':
 						return _elm_lang$core$Native_Utils.update(
@@ -9515,31 +9509,23 @@ var _user$project$Main$update = F2(
 							model,
 							{inDropZone: false});
 					default:
-						var _p10 = _p6._0;
-						return _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								textLen: A3(
-									_elm_community$maybe_extra$Maybe_Extra$unwrap,
-									0,
-									function (_p8) {
-										return A2(
-											_elm_lang$core$Result$withDefault,
-											0,
-											_user$project$Main$calcNonAscii(_p8));
-									},
-									_elm_lang$core$List$head(_p10)),
-								content: A3(
-									_elm_community$maybe_extra$Maybe_Extra$unwrap,
-									'',
-									function (_p9) {
-										return A2(
-											_elm_community$result_extra$Result_Extra$extract,
-											_elm_lang$core$Basics$identity,
-											_user$project$Main$getFileContent(_p9));
-									},
-									_elm_lang$core$List$head(_p10))
-							});
+						var _p7 = _elm_lang$core$List$head(_p5._0);
+						if (_p7.ctor === 'Nothing') {
+							return model;
+						} else {
+							var _p8 = _user$project$Main$getFileContent(_p7._0);
+							if (_p8.ctor === 'Err') {
+								return model;
+							} else {
+								var _p9 = _p8._0;
+								return _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										textLen: _user$project$Main$lengthNonAscii(_p9),
+										content: _p9
+									});
+							}
+						}
 				}
 			}(),
 			_1: _elm_lang$core$Platform_Cmd$none
@@ -9792,26 +9778,18 @@ var _user$project$Main$view = function (model) {
 						_0: A2(
 							_elm_lang$html$Html$p,
 							{ctor: '[]'},
-							(!_elm_lang$core$String$isEmpty(model.content)) ? _elm_lang$core$List$concat(
-								A2(
-									_elm_lang$core$List$intersperse,
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$br,
-											{ctor: '[]'},
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									},
-									A2(
-										_elm_lang$core$List$map,
-										function (_p11) {
-											return A2(
-												_elm_lang$core$List$map,
-												_user$project$Main$toHightlight,
-												_elm_lang$core$String$toList(_p11));
-										},
-										_elm_lang$core$String$lines(model.content)))) : _elm_lang$core$List$singleton(
+							(!_elm_lang$core$String$isEmpty(model.content)) ? A2(
+								_elm_lang$core$List$map,
+								function (_p10) {
+									return A2(
+										_elm_lang$html$Html$p,
+										{ctor: '[]'},
+										A2(
+											_elm_lang$core$List$map,
+											_user$project$Main$toHightlight,
+											_elm_lang$core$String$toList(_p10)));
+								},
+								_elm_lang$core$String$lines(model.content)) : _elm_lang$core$List$singleton(
 								_elm_lang$html$Html$text(''))),
 						_1: {ctor: '[]'}
 					}),

@@ -74,10 +74,8 @@ view model =
             [ p [ ]
                 ( if (not <| String.isEmpty model.content) then
                     model.content
-                      |> String.lines
-                      |> List.map (String.toList >> List.map toHightlight)
-                      |> List.intersperse [Html.br [] []]
-                      |> List.concat
+                    |> String.lines
+                    |> List.map (String.toList >> List.map toHightlight >> Html.p [])
                   else
                     List.singleton (text "")
                 )
@@ -104,22 +102,22 @@ dropable = FileReader.dropZone
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   ( case msg of
-      InputText str ->
-        { model | textLen = lengthNonAscii str
-                , content = str
+      InputText data ->
+        { model | textLen = lengthNonAscii data
+                , content = data
         }
       DropZoneEntered ->
         { model | inDropZone = True }
       DropZoneLeaved ->
         { model | inDropZone = False }
       FilesDropped files ->
-        { model | textLen = files
-                          |> List.head
-                          |> Maybe.Extra.unwrap 0 (calcNonAscii >> Result.withDefault 0)
-                , content = files
-                          |> List.head
-                          |> Maybe.Extra.unwrap "" (getFileContent >> Result.Extra.extract identity)
-        }
+        case List.head files of
+          Nothing -> model
+          Just file -> case getFileContent file of
+            Err _ -> model
+            Ok data -> { model | textLen = lengthNonAscii data
+                               , content = data
+                       }
   , Cmd.none
   )
 
@@ -141,9 +139,6 @@ isAscii c = 0x00 <= toCode c && toCode c <= 0x7f
 lengthNonAscii : String -> Int
 lengthNonAscii = String.filter (isAscii >> not)
               >> String.length
-
-calcNonAscii : FileReader.File -> Result String Int
-calcNonAscii = getFileContent >> Result.map lengthNonAscii
 
 getFileContent : FileReader.File -> Result String String
 getFileContent file =
