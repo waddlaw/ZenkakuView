@@ -8,6 +8,7 @@ import FileReader
 import MimeType
 import Maybe.Extra
 import Result.Extra
+import String.Extra
 
 -- モデル
 type alias Model =
@@ -72,12 +73,11 @@ view model =
             , style [ ("background-color", "#efefef" ) ]
             ]
             [ p [ ]
-                ( if (not <| String.isEmpty model.content) then
-                    model.content
-                    |> String.lines
-                    |> List.map (String.toList >> List.map toHightlight >> Html.p [])
-                  else
-                    List.singleton (text "")
+                ( case String.Extra.nonEmpty model.content of
+                    Nothing -> List.singleton (text "")
+                    Just data -> data
+                              |> String.lines
+                              |> List.map (String.toList >> List.map toHightlight >> Html.p [])
                 )
             ]
       ]
